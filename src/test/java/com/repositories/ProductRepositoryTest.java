@@ -6,9 +6,10 @@ import static org.junit.Assert.assertNull;
 
 import java.math.BigDecimal;
 
+import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,12 +21,13 @@ import com.repository.ProductRepository;
 @SpringBootTest(classes = DemoApplication.class)
 public class ProductRepositoryTest {
 	
-	@Autowired
+	@Resource
     private ProductRepository productRepository;
-
 
     @Test
     public void testSaveProduct(){
+    	
+    	productRepository.deleteAll();
         //setup product
         Product product = new Product();
         product.setDescription("Spring Framework Guru Shirt");
@@ -57,7 +59,7 @@ public class ProductRepositoryTest {
 
         //verify count of products in DB
         long productCount = productRepository.count();
-        assertEquals(productCount, 1);
+        assertEquals(1, productCount);
 
         //get all products, list should only have one
         Iterable<Product> products = productRepository.findAll();
@@ -68,6 +70,6 @@ public class ProductRepositoryTest {
             count++;
         }
 
-        assertEquals(count, 1);
+        assertEquals(1, count);
     }
 }
