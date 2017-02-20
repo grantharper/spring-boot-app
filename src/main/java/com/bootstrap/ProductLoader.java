@@ -37,6 +37,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
  
         Product mug = new Product();
         mug.setDescription("Spring Framework Guru Mug");
+        mug.setPrice(new BigDecimal("13.95"));
         mug.setImageUrl("https://springframework.guru/wp-content/uploads/2015/04/spring_framework_guru_coffee_mug-r11e7694903c348e1a667dfd2f1474d95_x7j54_8byvr_512.jpg");
         mug.setProductId("168639393495335947");
         productRepository.save(mug);
