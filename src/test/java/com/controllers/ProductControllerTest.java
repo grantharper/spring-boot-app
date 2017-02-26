@@ -13,7 +13,7 @@ import com.DemoApplication;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
 @WebAppConfiguration
-public class IndexControllerTest {
+public class ProductControllerTest {
 
 	@Test
 	public void testList() {

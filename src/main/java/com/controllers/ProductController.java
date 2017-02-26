@@ -1,6 +1,7 @@
 package com.controllers;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,7 @@ import com.domain.Product;
 import com.service.ProductService;
 
 @Controller
-public class IndexController {
+public class ProductController {
 
 	@Resource
 	ProductService productService;
@@ -47,7 +48,9 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String saveProduct(Product product) {
+	public String saveProduct(@Valid Product product) {
+		
+		
 		productService.saveProduct(product);
 		return "redirect:/product/show/" + product.getId();
 	}
@@ -63,8 +66,4 @@ public class IndexController {
 		return "login";
 	}
 	
-//	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-//	public String logout(){
-//		
-//	}
 }
