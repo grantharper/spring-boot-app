@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import com.repository.ProductRepository;
 import com.service.ProductService;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
 	
 	@Resource
@@ -33,5 +35,22 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteProduct(Integer id) {
 		productRepository.delete(id);
 	}
+
+	@Override
+	public Product transactionalCheck(Product product) throws Exception {
+		productRepository.save(product);
+		
+		throw new Exception("something went wrong");
+		
+	}
+	
+	@Override
+	public Product usingTransactions(Product product) throws Exception {
+		productRepository.save(product);
+		
+		throw new Exception("something went wrong");
+		
+	}
+	
 
 }

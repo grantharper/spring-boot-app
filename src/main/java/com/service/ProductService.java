@@ -10,4 +10,8 @@ public interface ProductService {
     Product saveProduct(Product product);
     
     void deleteProduct(Integer id);
+    
+    Product transactionalCheck(Product product) throws Exception;
+    
+    Product usingTransactions(Product product) throws Exception;
 }

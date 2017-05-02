@@ -3,20 +3,33 @@ package com.controllers;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.domain.Product;
 import com.service.ProductService;
+import com.validators.ProductValidator;
 
 @Controller
 public class ProductController {
 
 	@Resource
 	ProductService productService;
+	
+	//@Autowired
+	//@Qualifier("productValidator")
+	@Autowired
+	private ProductValidator productValidator;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	String index() {
@@ -48,8 +61,13 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String saveProduct(@Valid Product product) {
+	public String saveProduct(@Valid Product product, BindingResult bindingResult, Model model) {
 		
+		productValidator.validate(product, bindingResult);
+		
+		if(bindingResult.hasErrors()){
+			return "product-form";
+		}
 		
 		productService.saveProduct(product);
 		return "redirect:/product/show/" + product.getId();
