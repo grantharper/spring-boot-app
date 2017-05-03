@@ -19,4 +19,13 @@ public class FormFieldServiceImpl implements FormFieldService{
 		return formFieldRespository.findAll();
 	}
 
+	@Override
+	public void saveAllFormFields(Iterable<FormField> formFields) {
+
+		for(FormField field: formFields){
+			formFieldRespository.save(field);
+		}
+		
+	}
+
 }

@@ -6,4 +6,5 @@ public interface FormFieldService {
 
 	Iterable<FormField> listAllFormFields();
 	
+	void saveAllFormFields(Iterable<FormField> formFields);
 }
