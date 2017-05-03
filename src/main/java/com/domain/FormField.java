@@ -41,6 +41,11 @@ public class FormField extends AbstractDomainClass {
 	public void setValidation(String validation) {
 		this.validation = validation;
 	}
+	@Override
+	public String toString() {
+		return "FormField [label=" + label + ", name=" + name + ", value=" + value + ", required=" + required
+				+ ", validation=" + validation + "]";
+	}
 	
 	
 
