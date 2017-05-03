@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head lang="en">
+
+<title>Spring Framework Guru</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<h1>Generic Form Creation Demo</h1>
+		<form class="form-horizontal" th:object="${formFields}" th:action="@{/generic-form}" method="post">
+			<div th:each="formField: ${formFields}" class="form-group">
+				<label class="col-sm-2 control-label" th:text="${formField.label}"></label>
+				<div class="col-sm-10">
+                    <input type="text" class="form-control" th:name="${formField.name}" th:value="${formField.value}"/>
+                </div>
+			</div>
+			<div class="row">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+		</form>
+		
+	</div>
+
+</body>
+</html>

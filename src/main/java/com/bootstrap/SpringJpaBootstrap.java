@@ -10,9 +10,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.domain.FormField;
 import com.domain.Product;
 import com.domain.Role;
 import com.domain.User;
+import com.repository.FormFieldRepository;
 import com.repository.ProductRepository;
 import com.service.RoleService;
 import com.service.UserService;
@@ -22,6 +24,8 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 
 	@Resource
 	private ProductRepository productRepository;
+	@Resource
+	private FormFieldRepository formFieldRepository;
 	@Resource
 	private UserService userService;
 	@Resource
@@ -37,6 +41,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		loadRoles();
 		assignUsersToUserRole();
 		assignUsersToAdminRole();
+		loadFormFields();
 
 	}
 
@@ -120,6 +125,25 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 
 		log.info("Saved Mug - id:" + mug.getId());
 
+	}
+	
+	private void loadFormFields(){
+		
+		FormField field1 = new FormField();
+		field1.setLabel("First Name");
+		field1.setName("firstName");
+		field1.setValue("Grant");
+		field1.setValidation("^[A-Z]*$");
+		
+		FormField field2 = new FormField();
+		field2.setLabel("Last Name");
+		field2.setName("lastName");
+		field2.setValue("Harper");
+		field2.setValidation("^[a-z]*$");
+		
+		formFieldRepository.save(field1);
+		formFieldRepository.save(field2);
+		
 	}
 
 }
