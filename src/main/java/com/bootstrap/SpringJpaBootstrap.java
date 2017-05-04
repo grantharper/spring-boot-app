@@ -133,12 +133,14 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 		field1.setLabel("First Name");
 		field1.setName("firstName");
 		field1.setValue("Grant");
+		field1.setRequired(true);
 		field1.setValidation("^[A-Z]*$");
 		
 		FormField field2 = new FormField();
 		field2.setLabel("Last Name");
 		field2.setName("lastName");
 		field2.setValue("Harper");
+		field1.setRequired(true);
 		field2.setValidation("^[a-z]*$");
 		
 		formFieldRepository.save(field1);

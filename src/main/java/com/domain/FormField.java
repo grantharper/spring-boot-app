@@ -1,5 +1,7 @@
 package com.domain;
 
+import java.util.regex.Pattern;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -10,6 +12,11 @@ public class FormField extends AbstractDomainClass {
 	private String value;
 	private boolean required;
 	private String validation;
+	private String error;
+	
+	public boolean isInvalidInput(String input){
+		return Pattern.compile(this.validation).matcher(input).matches();
+	}
 	
 	public String getLabel() {
 		return label;
@@ -41,10 +48,16 @@ public class FormField extends AbstractDomainClass {
 	public void setValidation(String validation) {
 		this.validation = validation;
 	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
 	@Override
 	public String toString() {
 		return "FormField [label=" + label + ", name=" + name + ", value=" + value + ", required=" + required
-				+ ", validation=" + validation + "]";
+				+ ", validation=" + validation + ", error=" + error + "]";
 	}
 	
 	

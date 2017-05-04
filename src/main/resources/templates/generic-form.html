@@ -16,6 +16,9 @@
 				<div class="col-sm-10">
                     <input type="text" class="form-control" th:name="${formField.name}" th:value="${formField.value}"/>
                 </div>
+                <div th:if="${formField.error} != null" class="col-sm-10">
+                    <p th:text="${formField.error}"/>
+                </div>
 			</div>
 			<div class="row">
                 <button type="submit" class="btn btn-default">Submit</button>
